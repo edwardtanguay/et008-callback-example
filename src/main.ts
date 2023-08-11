@@ -1,10 +1,11 @@
 import { ColorDataLoader } from './components/ColorDataLoader';
 import { EmployeeDataLoader } from './components/EmployeeDataLoader';
+import { showWaiting } from './tools';
 import './style.scss';
 
 const colors = ColorDataLoader();
 
-EmployeeDataLoader((employees) => {
+EmployeeDataLoader(showWaiting, (employees) => {
 	document.querySelector<HTMLDivElement>('.employeeInfo')!.innerHTML = `
 	There are ${employees.length} employees:
 	<ul>
