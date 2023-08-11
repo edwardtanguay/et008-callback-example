@@ -1,3 +1,3 @@
-export const DataLoader = () => {
+export const ColorDataLoader = () => {
 	return ['green', 'yellow', 'red', 'purple'];
 };

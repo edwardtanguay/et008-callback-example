@@ -1,7 +1,7 @@
-import { DataLoader } from './components/dataLoader';
+import { ColorDataLoader } from './components/ColorDataLoader';
 import './style.scss';
 
-const colors = DataLoader();
+const colors = ColorDataLoader();
 
 document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
 <h1>Callback Demo Site</h1>
