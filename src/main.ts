@@ -3,26 +3,35 @@ import { EmployeeDataLoader } from './components/EmployeeDataLoader';
 import { showWaiting } from './tools';
 import './style.scss';
 import { CustomerDataLoader } from './components/CustomerDataLoader';
-import { ICustomer } from './interfaces';
+import { ICustomer, IEmployeeDataLoaderData } from './interfaces';
 
 const colors = ColorDataLoader();
 
 document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
-<h1>Callback Demo Site</h1>
+<h1>Callback/Promise Demo Site</h1>
 <p>There are ${colors.length} colors: ${colors.map(m => `${m}`).join(', ')}</p>
 <div class="employeeInfo"></div>
 <div class="customerInfo"></div>
 `;
 
-EmployeeDataLoader('.employeeInfo', showWaiting, (employees) => {
-	document.querySelector<HTMLDivElement>('.employeeInfo')!.innerHTML = `
+EmployeeDataLoader('.employeeInfo', showWaiting, (data: IEmployeeDataLoaderData) => {
+	const _customerInfoElem = document.querySelector<HTMLDivElement>('.employeeInfo');
+	if (_customerInfoElem) {
+		const customerInfoElem = _customerInfoElem;
+		if (!data.hasError) {
+			const employees = data.employees;
+			customerInfoElem.innerHTML = `
 	There are ${employees.length} employees:
 	<ul>
 	${employees.map(employee => {
-		return `<li>${employee.firstName} ${employee.lastName}</li>`;
-	}).join('')}	
+				return `<li>${employee.firstName} ${employee.lastName}</li>`;
+			}).join('')}	
 	</ul>
 	`;
+		} else {
+			customerInfoElem.innerHTML = `<p class="error">${data.errorMessage}</p>`;
+		}
+	}
 });
 
 (async () => {

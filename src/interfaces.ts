@@ -7,3 +7,9 @@ export interface ICustomer {
 	companyName: string,
 	contactName: string
 }
+
+export interface IEmployeeDataLoaderData {
+	employees: IEmployee[],
+	hasError: boolean,
+	errorMessage: string
+}
