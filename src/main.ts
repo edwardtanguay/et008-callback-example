@@ -1,12 +1,12 @@
 import { ColorDataLoader } from './components/ColorDataLoader';
 import { EmployeeDataLoader } from './components/EmployeeDataLoader';
-import { showWaitingCustomers, showWaitingEmployees } from './tools';
+import { showWaiting } from './tools';
 import './style.scss';
 import { CustomerDataLoader } from './components/CustomerDataLoader';
 
 const colors = ColorDataLoader();
 
-EmployeeDataLoader(showWaitingEmployees, (employees) => {
+EmployeeDataLoader('.employeeInfo', showWaiting, (employees) => {
 	document.querySelector<HTMLDivElement>('.employeeInfo')!.innerHTML = `
 	There are ${employees.length} employees:
 	<ul>
@@ -17,7 +17,7 @@ EmployeeDataLoader(showWaitingEmployees, (employees) => {
 	`;
 });
 
-CustomerDataLoader(showWaitingCustomers, (customers) => {
+CustomerDataLoader('.customerInfo', showWaiting, (customers) => {
 	document.querySelector<HTMLDivElement>('.customerInfo')!.innerHTML = `
 	There are ${customers.length} customers:
 	<ul>

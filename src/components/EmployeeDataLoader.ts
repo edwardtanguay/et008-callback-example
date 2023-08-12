@@ -4,8 +4,8 @@ import * as config from '../config';
 
 const url = 'https://edwardtanguay.vercel.app/share/employees.json';
 
-export const EmployeeDataLoader = async (cbPreload: () => void, cbPostload: (employees: IEmployee[]) => void) => {
-	cbPreload();
+export const EmployeeDataLoader = async (elementIdentifier: string, cbPreload: (elementIdentifier: string) => void, cbPostload: (employees: IEmployee[]) => void) => {
+	cbPreload(elementIdentifier);
 	setTimeout(async () => {
 		const employees: IEmployee[] = (await axios.get(url)).data;
 		cbPostload(employees);
